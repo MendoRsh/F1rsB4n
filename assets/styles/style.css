@@ -1,0 +1,649 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+:root{
+    --backgroundColor: #F9F9FA;
+    --SecundaryText: #707070;
+    --ButtonHover: #D9DADD;
+    --FrameBancol: url(assets\images\auth-trazo.svg);
+    --LogoBancol: url(assets\images\Logo-Bancol.svg);
+    --LetraNegra: #2c2a29;
+}
+
+body{
+    background-color: var(--backgroundColor);
+    font-size: 1rem;
+    font-family: "Open Sans", Arial, "sans-serif";
+    color: #2c2a29;
+    line-height: 24px;
+    letter-spacing: -0.3px;
+}
+
+.rayasBancol{
+    background-image: url(https://autenticacion.apps.bancolombia.com/static/media/trazo-mobile.c9a2457e0745f3150ee0d62c9e906218.svg);
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    padding-right: 16px;
+    padding-left: 16px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.containerAllHeader{
+    justify-content: center;
+    display: flex;
+}
+
+.containerLogotipo{
+    justify-content: center;
+    margin-top: 3rem;
+    display: flex;
+}
+
+.logo{
+    height: 6rem;
+    justify-content: center;
+    display: flex;
+}
+
+.logo img{
+    width: 11.5rem;
+}
+
+/* MENSAJE PRICIPAL */
+
+.welcomeMessage{
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 200;
+    line-height: 40px;
+    letter-spacing: 0px;
+    font-synthesis: none;
+}
+
+
+/* COTENEDOR DEL FORM */
+
+.form-container{
+    padding-bottom: 1.857rem;
+    justify-content: center;
+}
+
+.continerDosForm{
+    padding-right: 4px;
+    padding-left: 4px;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.cardBody{
+    margin-top: 1.5rem;
+}
+
+.card-container{
+    background-color: #fff;
+    height: auto;
+    width: auto;
+    padding: 0;
+    display: flex;
+    border-radius: 8px 8px 8px 8px;
+    object-fit: cover;
+    position: relative;
+}
+
+.containerFormularioCentrado{
+    padding: 1.5rem;
+}
+
+.mensajeBienvenida{
+    text-align: center;
+}
+
+.mensajeBienvenida h1{
+    font-family: "Open Sans";
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 24px;
+    letter-spacing: 0px;
+    font-synthesis: none;
+}
+
+.mensajeBienvenida h3{
+    font-family: "Open Sans";
+    margin-top: 1rem;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 24px;
+    letter-spacing: 0px;
+    font-synthesis: none;
+}   
+
+
+/* FORMULARIO */
+.contenedorForm{
+    margin-bottom: 3rem;
+    display: grid;
+    width: 100%;
+}
+
+.separadorText{
+    margin-top: 2rem;
+}
+
+.fa-solid{
+    width: 10px;
+    font-size: 1rem;
+}
+
+.contenedorUser{
+    margin-bottom: 15px;
+    display: grid;
+    width: 100%;
+    position: relative;
+    height: 52px;
+    margin-top: 20px;
+}
+.iconoUser{
+    background-image: url(https://autenticacion.apps.bancolombia.com/static/media/user.39a37ef47269f6d65906fbb23186e4b6.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: absolute;
+    height: 24px;
+    top: 12px;
+    text-align: center;
+    width: 21px !important;
+}
+
+.iconoLock{
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjUiIHZpZXdCb3g9IjAgMCAyNCAyNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik03IDEwLjAyMTJWNy4wMjEyNEM3IDQuMjY0MjQgOS4yNDMgMi4wMjEyNCAxMiAyLjAyMTI0QzE0Ljc1NyAyLjAyMTI0IDE3IDQuMjY0MjQgMTcgNy4wMjEyNFYxMC4wMjEySDE5VjE1LjAyMTJDMTkgMTguODgxMiAxNS44NiAyMi4wMjEyIDEyIDIyLjAyMTJDOC4xNCAyMi4wMjEyIDUgMTguODgxMiA1IDE1LjAyMTJWMTAuMDIxMkg3Wk0xMiAzLjAyMTI0QzE0LjIwNiAzLjAyMTI0IDE2IDQuODE1MjQgMTYgNy4wMjEyNFYxMC4wMjEySDhWNy4wMjEyNEM4IDQuODE1MjQgOS43OTQgMy4wMjEyNCAxMiAzLjAyMTI0Wk02IDExLjAyMTJWMTUuMDIxMkM2IDE4LjMzMDIgOC42OTEgMjEuMDIxMiAxMiAyMS4wMjEyQzE1LjMwOSAyMS4wMjEyIDE4IDE4LjMzMDIgMTggMTUuMDIxMlYxMS4wMjEySDZaTTExIDE0LjAyMTJDMTEgMTMuNDcwMiAxMS40NDkgMTMuMDIxMiAxMiAxMy4wMjEyQzEyLjU1MSAxMy4wMjEyIDEzIDEzLjQ3MDIgMTMgMTQuMDIxMkMxMyAxNC41NzIyIDEyLjU1MSAxNS4wMjEyIDEyIDE1LjAyMTJDMTEuNDQ5IDE1LjAyMTIgMTEgMTQuNTcyMiAxMSAxNC4wMjEyWk0xMi41IDE1Ljk1OEMxMy4zNjE4IDE1LjczNTUgMTQgMTQuOTUxNiAxNCAxNC4wMjEyQzE0IDEyLjkxODIgMTMuMTAzIDEyLjAyMTIgMTIgMTIuMDIxMkMxMC44OTcgMTIuMDIxMiAxMCAxMi45MTgyIDEwIDE0LjAyMTJDMTAgMTQuOTUxNiAxMC42MzgyIDE1LjczNTUgMTEuNSAxNS45NThWMTguMDIxMkgxMi41VjE1Ljk1OFoiIGZpbGw9IiMyQzJBMjkiLz4KPC9zdmc+Cg==);
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: absolute;
+    height: 24px;
+    top: 12px;
+    text-align: center;
+    width: 21px !important;
+}
+
+
+
+
+.desingInput{
+    border-width: 0px 0px 1px;
+    border-top-style: initial;
+    border-right-style: initial;
+    border-left-style: initial;
+    border-top-color: initial;
+    border-right-color: initial;
+    border-left-color: initial;
+    border-image: initial;
+    color: rgb(41, 41, 41);
+    font-family: "Open Sans";
+    letter-spacing: -0.3px;
+    line-height: 24px;
+    background-color: transparent;
+    outline: none;
+    padding: 12px 3px 5px 30px;
+    font-size: 16px;
+    transition: all 0.2s ease 0s;
+    position: relative;
+    z-index: 510;
+    border-bottom-style: solid;
+    border-bottom-color: #4e4e4e;
+}
+
+
+
+.link-underline{
+    font-family: "Open Sans";
+    font-weight: 700;
+    font-size: 0.75rem;
+    line-height: 16px;
+    letter-spacing: 0px;
+    font-synthesis: none;
+    text-decoration: dashed;
+}
+
+.separadorContra{
+    margin-top: 1.5rem;
+}
+
+.contenedorPass{
+    margin-bottom: 15px;
+    display: grid;
+    width: 100%;
+    position: relative;
+    height: 52px;
+    margin-top: 20px;
+}
+
+.separadorLineas{
+    padding-top: 5px;
+}
+
+.separadorEnlacess{
+    padding: 5px;
+}
+.ColorU{
+    color: var(--LetraNegra);
+}
+
+.lineaEnlaces{
+    text-decoration: underline;
+}
+
+/* BOTON PRINCIPAL */
+
+.auth-button{
+    display: flex;
+    justify-content: center;
+}
+
+.button-primary{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 8px;
+    border-style: none; 
+    padding: 12px 24px;
+    outline: 0 none;
+    text-transform: none;
+    text-decoration: none;
+    border-radius: 100px;
+    overflow: hidden;
+    min-height: 32px;
+    white-space: initial;
+    font-family: "Open Sans";
+    font-weight: 700;
+    font-size: 1.125rem;
+    letter-spacing: 0px;
+    font-synthesis: none;
+    line-height: 26px;
+    background-color: #fdda24;
+}
+
+
+.crearUsuario{
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+.createUser{
+    font-family: "Open Sans";
+    font-weight: 700;
+    font-size: 0.875rem;
+    line-height: 20px;
+    letter-spacing: 0px;
+    font-synthesis: none;
+    align-items: center;
+    
+}
+
+
+/* FOOTER */
+
+.contenedorFooter{
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.containerFooter{
+    width: 100%;
+    max-width: 100%;
+    padding-right: 16px;
+    padding-left: 16px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.contenedorMensajesFooter{
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+    color: var(--LetraNegra);
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+
+.top-links{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #2c2a29;
+}
+
+
+.divisor{
+    width: auto;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin: 16px 0px 16px 0px;
+    height: 1px;
+    border-radius: 4px;
+    background: #b3b5b8;
+}
+
+.footerButton{
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    display: flex;
+    align-self: stretch;
+}
+
+.bottonLeft{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    flex: 1 0 0;
+}
+.botonBancol{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 0;
+}
+
+.bottonLogoBancol{
+    font-size: 0;
+    line-height: 0;
+    margin-bottom: 8px;
+}
+
+.bottonLogoBancol img{
+    width: 150px;
+}
+
+.bottonVigilate{
+    margin: 16px 0px 0px 0px;
+    position: relative;
+    height: 16px;
+}
+
+.bottonVigilate img{
+    width: 16px;
+    transform: rotate(90deg);
+    top: -57px;
+    position: absolute;
+}
+
+	/* ==================== */
+/*   DINAMICA STYLES    */
+/* ==================== */
+
+.otp-page .contenedorForm{
+    max-height: min-content;
+    width: calc(100vw - 32px);
+    padding-right: 16px;
+    padding-left: 16px;
+    max-width: 528px;
+    box-shadow: 0 16px 20px 0 rgba(44,42,41,.1607843137),0 1px 12px 0 rgba(43,42,41,.0784313725);
+    display: flex;
+    flex-direction: column-reverse;
+    height: auto;
+    overflow: hidden;
+    padding: 16px 24px 32px;
+    position: relative;
+    z-index: 100;
+    border-radius: 16px 16px 16px 16px;
+    background-color: #fff;
+}
+.esquemaBase{
+    z-index: 999;
+    display: block;
+    overflow-y: auto;
+    padding: 16px;
+    backdrop-filter: blur(1.5px);
+    background-color: rgba(44,42,41,.8);
+    bottom: 0px;
+    height: 100vh;
+    left: 0px;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    width: 100vw;
+}
+
+
+.containerInfoForm{
+    flex: 1;
+    overflow: auto;
+}   
+
+.headerForm{
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.containerGif{
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: center;
+    border-radius: 8px 8px 8px 8px;
+    max-height: 8.4375rem;
+    overflow: hidden;
+    background-color: #9be0f1;
+}
+
+.dinMensaje{
+    font-family: "CIB Sans bold";
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 32px;
+    letter-spacing: 0px;
+    font-synthesis: none;
+}
+
+.dinMensajePeq{
+    padding-bottom: 0;
+    text-align: center;
+    font-size: 1rem;
+    font-family: "Open Sans","sans-serif";
+    line-height: 24px;
+    letter-spacing: -0.3px;
+}
+
+.containerInputs{
+    padding-bottom: 24px;
+}
+
+.inputsContainer{
+    padding-bottom: 12px;
+}
+
+.camposInputs{
+    margin-bottom: 15px;
+    display: grid;
+    width: 100%;
+    position: relative;
+    height: 52px;
+    margin-top: 20px;
+}
+
+.tokenInputs{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.inputs{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.DInputs{
+    border-bottom: solid 2px #383736;
+    font-family: "CIB Sans bold";
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 28px;
+    letter-spacing: 0px;
+    font-synthesis: none;
+    padding-right: 0;
+    width: 40px;
+    margin: 0 4px;
+    background-color: rgba(0,0,0,0);
+    color: #2c2a29;
+    display: block;
+    height: 32px;
+    text-align: center;
+    text-transform: none;
+}
+
+
+/* BUTTONS */
+
+.containerAllButtons{
+    padding-bottom: 0;
+    flex-wrap: nowrap;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+}
+
+.btnBorrar{
+    min-width: 128.5px;
+    flex-basis: fit-content;
+    width: 100%;
+    padding: 8px 16px;
+    font-family: "CIB Sans bold";
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 24px;
+    letter-spacing: 0px;
+    font-synthesis: none;
+    background-color: rgba(255,255,255,0);
+    color: #2c2a29;
+    border: 1px solid #2c2a29;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 8px;
+    outline: 0 none;
+    text-transform: none;
+    text-decoration: none;
+    border-radius: 100px 100px 100px 100px;
+    overflow: hidden; 
+    height: auto;
+    min-height: 32px;
+    white-space: initial;
+}
+
+.btnContinuar{
+    min-width: 128.5px;
+    flex-basis: fit-content;
+    width: 100%;
+    padding: 8px 16px;
+    font-family: "CIB Sans bold";
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 24px;
+    letter-spacing: 0px;
+    font-synthesis: none;
+    line-height: 24px;
+    background-color: #fdda24;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 8px;
+    border-style: none;
+    outline: 0 none;
+    text-transform: none;
+    text-decoration: none;
+    border-radius: 100px 100px 100px 100px;
+    overflow: hidden;
+    height: auto;
+    min-height: 32px;
+    white-space: initial;
+}
+
+
+/* CERRAR */
+
+.equisEsquina{
+    display: ruby;
+    margin-bottom: 8px;
+    text-align: end;
+    order: 1;
+}
+
+/* ==================== */
+/* RESPONSIVE DESIGN */
+/* ==================== */
+
+/* Tablet (768px en adelante) */
+@media (min-width: 768px) {
+  .card-container {
+    max-width: 500px; /* Limita el ancho del formulario */
+    margin: 0 auto;   /* Centrado */
+  }
+
+  .button-primary {
+    max-width: 300px; /* Botón más ancho */
+    margin: 0 auto;
+  }
+
+  .rayasBancol {
+    background-image: url(https://autenticacion.apps.bancolombia.com/static/media/trazo-mobile.c9a2457e0745f3150ee0d62c9e906218.svg);
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    padding-right: 16px;
+    padding-left: 16px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+/* Desktop (1024px en adelante) */
+@media (min-width: 1024px) {
+  .containerLogotipo {
+    margin-top: 5rem; /* Más espacio superior */
+  }
+
+  .welcomeMessage {
+    font-size: 2rem; /* Texto más grande */
+  }
+
+  .contenedorForm {
+    padding: 0 2rem; /* Más aire interno */
+  }
+
+  .bottonLogoBancol img {
+    width: 180px; /* Logo más grande en footer */
+  }
+}
+
+/* Pantallas pequeñas (menos de 400px) */
+@media (max-width: 400px) {
+  .logo img {
+    width: 9rem; /* Logo más pequeño */
+  }
+
+  .mensajeBienvenida h1 {
+    font-size: 1.2rem; /* Ajuste de texto */
+  }
+}
