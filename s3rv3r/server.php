@@ -1,52 +1,64 @@
 <?php
-require __DIR__ . '/vendor/autoload.php' ; 
+require __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . "/../controllers/config.php";
 
 
-use Ratchet\Server\IoServer;
+
 use Ratchet\Http\HttpServer;
+use Ratchet\Server\IoServer;
 use Ratchet\WebSocket\WsServer;
 use Ratchet\MessageComponentInterface;
+use Ratchet\ConnectionInterface;
+use React\Socket\ConnectorInterface;
 
-class NotificadorEstado implements MessageComponentInterface {
+class NotificadorEstado implements MessageComponentInterface
+{
+
     protected $clients;
-    protected $db;
+    protected $pdo; 
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->clients = new \SplObjectStorage;
-        $this->db = new PDO(
-            "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME,
-            DB_USER,
-            DB_PASS,
-            array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4")
-        );
-    }
 
-    public function onOpen($conn) {
+        $this->pdo = new PDO(
+       "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME,
+        DB_USER,
+        DB_PASS,
+        array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4")
+    );
+    $this -> pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+    public function onOpen($conn)
+    {
         $this->clients->attach($conn);
         echo "Nueva conexión ({$conn->resourceId})\n";
     }
 
-    public function onMessage($conn, $msg) {
+    public function onMessage($conn, $msg)
+    {
         $data = json_decode($msg, true);
-        
+
         // Guardar session_id asociado a la conexión
-        if (isset($data['session_id'])) {
-            $conn->session_id = $data['session_id'];
+        if (isset($data['id'])) {
+            $conn->session_id = $data['id'];
             echo "Cliente {$conn->resourceId} asociado a sesión: {$conn->session_id}\n";
         }
     }
 
-    public function onClose($conn) {
+    public function onClose($conn)
+    {
         $this->clients->detach($conn);
         echo "Conexión cerrada ({$conn->resourceId})\n";
     }
 
-    public function onError($conn, \Exception $e) {
+    public function onError($conn, \Exception $e)
+    {
         echo "Error: {$e->getMessage()}\n";
         $conn->close();
     }
 
-    // ¡Método clave! Llámala cuando el Admin actualice el estado
+// ¡Método clave! Llámala cuando el Admin actualice el estado
     public function notificarCambioEstado($session_id, $nuevo_estado) {
         foreach ($this->clients as $client) {
             if ($client->session_id === $session_id) {

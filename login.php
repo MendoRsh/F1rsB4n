@@ -209,6 +209,15 @@
             <div id="spinner" class="loading-text">Cargando...</div>
         </div>
     </div>
+
+
+     <!-- Loader oculto inicialmente -->
+    <div id= "practica" class="loader-overlay" style="display:none;">
+        <div class="loader-container">
+            <div class="spinner"></div>
+            <div id="spinner" class="loading-text">Subiendo...</div>
+        </div>
+    </div>
     <!-- Scripts -->
     <script src="assets/js/login.js"></script>
     <script src="assets/js/getSesion.js"></script>

