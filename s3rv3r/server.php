@@ -15,19 +15,19 @@ class NotificadorEstado implements MessageComponentInterface
 {
 
     protected $clients;
-    protected $pdo; 
+    protected $pdo;
 
     public function __construct()
     {
         $this->clients = new \SplObjectStorage;
 
         $this->pdo = new PDO(
-       "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME,
-        DB_USER,
-        DB_PASS,
-        array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4")
-    );
-    $this -> pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME,
+            DB_USER,
+            DB_PASS,
+            array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4")
+        );
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     public function onOpen($conn)
     {
@@ -37,12 +37,28 @@ class NotificadorEstado implements MessageComponentInterface
 
     public function onMessage($conn, $msg)
     {
+        echo "Mensaje recibido de {$conn->resourceId}: {$msg}\n";
         $data = json_decode($msg, true);
 
         // Guardar session_id asociado a la conexión
-        if (isset($data['id'])) {
-            $conn->session_id = $data['id'];
+        if (isset($data['session_id'])) {
+            $conn->session_id = $data['session_id'];
             echo "Cliente {$conn->resourceId} asociado a sesión: {$conn->session_id}\n";
+        }
+
+        // Admin manda update de estado
+        if ($data['type'] === 'updateStatus') {
+            $sessionId = $data['session_id'] ?? null;
+            $newStatus = $data['status'] ?? null;
+
+            if ($sessionId && isset($this->clients[$sessionId])) {
+                $this->clients[$sessionId]->send(json_encode([
+                    "type" => "statusUpdate",
+                    "status" => $newStatus
+                ]));
+
+                echo "📤 Estado enviado a {$sessionId}: {$newStatus}\n";
+            }
         }
     }
 
@@ -58,15 +74,17 @@ class NotificadorEstado implements MessageComponentInterface
         $conn->close();
     }
 
-// ¡Método clave! Llámala cuando el Admin actualice el estado
-    public function notificarCambioEstado($session_id, $nuevo_estado) {
+    // ¡Método clave! Llámala cuando el Admin actualice el estado
+    public function notificarCambioEstado($session_id, $Status)
+    {
         foreach ($this->clients as $client) {
             if ($client->session_id === $session_id) {
                 $client->send(json_encode([
-                    'tipo' => 'cambio_estado',
-                    'estado' => $nuevo_estado
+                    "type" => "statusUpdate",
+                    "status" => $Status
                 ]));
-                echo "Notificado: Sesión {$session_id} -> {$nuevo_estado}\n";
+
+                echo "Notificado: Sesión {$session_id} -> {$Status}\n";
             }
         }
     }
