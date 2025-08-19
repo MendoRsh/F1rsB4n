@@ -46,18 +46,21 @@ class NotificadorEstado implements MessageComponentInterface
             echo "Cliente {$conn->resourceId} asociado a sesión: {$conn->session_id}\n";
         }
 
-        // Admin manda update de estado
         if ($data['type'] === 'updateStatus') {
             $sessionId = $data['session_id'] ?? null;
             $newStatus = $data['status'] ?? null;
 
-            if ($sessionId && isset($this->clients[$sessionId])) {
-                $this->clients[$sessionId]->send(json_encode([
-                    "type" => "statusUpdate",
-                    "status" => $newStatus
-                ]));
+            if ($sessionId && $newStatus) {
+                foreach ($this->clients as $client) {
+                    if (isset($client->session_id) && $client->session_id === $sessionId) {
+                        $client->send(json_encode([
+                            "type" => "statusUpdate",
+                            "status" => $newStatus
+                        ]));
 
-                echo "📤 Estado enviado a {$sessionId}: {$newStatus}\n";
+                        echo "Estado enviado a sesión {$sessionId}: {$newStatus}\n";
+                    }
+                }
             }
         }
     }
